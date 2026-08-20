@@ -1,231 +1,188 @@
 <!DOCTYPE html>
-<html lang="am">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immigration Services - የቪዛ እና የጉዞ አገልግሎት</title>
+    <title>Immigration Selection List</title>
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
             background-color: #f8fafc;
-            color: #334155;
-            line-height: 1.6;
-        }
-        /* Header */
-        header {
-            background-color: #0f172a;
-            color: white;
-            padding: 1rem 5%;
+            color: #1e293b;
+            padding: 20px 10px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .logo {
+
+        /* ፈልጎ ማግኛ ሳጥን (Search Bar) */
+        .search-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: #4cae4c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* የመግቢያ ጽሁፍ */
+        .header-section {
+            max-width: 500px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .header-section h2 {
             font-size: 1.4rem;
             font-weight: bold;
-            color: #38bdf8;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 1.2rem;
-            font-weight: 500;
-        }
-        nav a:hover {
-            color: #38bdf8;
-        }
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 58, 138, 0.85)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200') center/cover;
-            color: white;
-            text-align: center;
-            padding: 5rem 1rem;
-        }
-        .hero h1 {
-            font-size: 2.3rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-        }
-        .btn {
-            background-color: #2563eb;
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1rem;
-            cursor: pointer;
-            display: inline-block;
-        }
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-        /* Services Section */
-        .services {
-            padding: 4rem 5%;
-            text-align: center;
-        }
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
             color: #0f172a;
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+
+        .header-section p {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.5;
         }
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #2563eb;
+
+        /* የሰው መረጃ ካርድ (Card) */
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        .service-card h3 {
-            color: #1e3a8a;
-            margin-bottom: 0.8rem;
+
+        .img-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
         }
-        /* Form Section */
-        .booking {
-            background-color: #f1f5f9;
-            padding: 4rem 5%;
-            text-align: center;
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+        /* አረንጓዴ እና ቀይ ብርሃን በፎቶው ዙሪያ */
+        .card.accepted .profile-img {
+            box-shadow: 0 0 20px 5px rgba(46, 204, 113, 0.5);
         }
-        .form-group {
-            margin-bottom: 1.2rem;
-            text-align: left;
+
+        .card.declined .profile-img {
+            box-shadow: 0 0 20px 5px rgba(231, 76, 60, 0.5);
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+
+        .info {
+            font-size: 0.88rem;
             font-weight: 600;
         }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 5px;
-            font-size: 1rem;
+
+        .info p {
+            margin-bottom: 4px;
+            color: #1e293b;
         }
-        .passport-note {
-            background-color: #eff6ff;
-            border-left: 4px solid #2563eb;
-            padding: 10px;
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-            text-align: left;
+
+        /* ACCEPTED እና DECLINED ምልክት */
+        .status-badge {
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
         }
-        /* Footer */
-        footer {
-            background-color: #0f172a;
+
+        .status-badge.accepted {
+            background-color: #2ecc71;
             color: white;
-            text-align: center;
-            padding: 2rem;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
+        }
+
+        .status-badge.declined {
+            background-color: #e74c3c;
+            color: white;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">Immigration Services</div>
-        <nav>
-            <a href="#home">መነሻ</a>
-            <a href="#services">አገልግሎቶች</a>
-            <a href="#apply">ማመልከቻ</a>
-        </nav>
-    </header>
+    <!-- Search Section -->
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Type to search...">
+        <button class="search-btn">Find</button>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>ህጋዊ የቪዛ እና የጉዞ ማመቻቸት አገልግሎት</h1>
-        <p>ለስራ፣ ለትምህርት እና ለጉብኝት ሂደቶች ፈጣን እና አስተማማኝ መፍትሄ እንሰጣለን።</p>
-        <a href="#apply" class="btn">አሁኑኑ ያመልክቱ</a>
-    </section>
+    <!-- Header Section -->
+    <div class="header-section">
+        <h2>CONGRATULATIONS FOR PEOPLE THAT GOT ACCEPTANCE LETTER FROM MAPLE LEAF FOOD PRODUCTION COMPANY.</h2>
+        <p>We are pleased to offer you the position of produf Company. After carefully reviewing your application, your personality make you an excellent fit for our team. Your starting salary will be start 45$/hour and you will be entitled to other benefits. we have listed the name of our new workers who have been selected to work with us.</p>
+    </div>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title">የምናቀርባቸው አገልግሎቶች</h2>
-        <div class="service-grid">
-            <div class="service-card">
-                <h3>💼 Work Permits</h3>
-                <p>የህጋዊ ስራ እድሎች እና የቪዛ ሂደቶች ማመቻቸት።</p>
-            </div>
-            <div class="service-card">
-                <h3>🎓 Student Visas</h3>
-                <p>በትምህርት እድሎች እና የዩኒቨርሲቲ መግቢያ ማመቻቸት።</p>
-            </div>
-            <div class="service-card">
-                <h3>✈️ Tourist Visas</h3>
-                <p>ለጉብኝት እና ለመዝናናት የቪዛ ሂደቶች ማጠናቀቅ።</p>
-            </div>
+    <hr style="width:100%; max-width:450px; border:0; border-top:1px solid #cbd5e1; margin-bottom:20px;">
+
+    <!-- ሰው 1: ACCEPTED -->
+    <div class="card accepted">
+        <div class="img-container">
+            <img src="https://via.placeholder.com/120" class="profile-img" alt="Profile">
         </div>
-    </section>
+        <div class="info">
+            <p><strong>NAME:</strong> ABRHAM GEZAHEGN KASA</p>
+            <p><strong>AGE:</strong> 26</p>
+            <p><strong>SEX:</strong> M</p>
+            <p><strong>NATIONALITY:</strong> ETHIOPIA</p>
+            <p><strong>EP:</strong> 1636656</p>
+            <p><strong>ACCEPTANCE:</strong> <span class="status-badge accepted">ACCEPTED</span></p>
+        </div>
+    </div>
 
-    <!-- Booking Form Section -->
-    <section class="booking" id="apply">
-        <h2 class="section-title">የቪዛ ማመልከቻ ቅጽ</h2>
-        <form action="https://formspree.io/f/xbgrppdg" method="POST">
-            <div class="form-group">
-                <label for="name">ሙሉ ስም</label>
-                <input type="text" id="name" name="name" placeholder="ስምዎን ያስገቡ" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">ስልክ ቁጥር</label>
-                <input type="tel" id="phone" name="phone" placeholder="09..." required>
-            </div>
-            
-            <div class="form-group">
-                <label for="visa-type">የቪዛ አይነት</label>
-                <select id="visa-type" name="visa_type" required>
-                    <option value="">-- ይምረጡ --</option>
-                    <option value="Work Visa">Work Visa</option>
-                    <option value="Student Visa">Student Visa</option>
-                    <option value="Tourist Visa">Tourist Visa</option>
-                </select>
-            </div>
-
-            <div class="passport-note">
-                📌 <strong>ማሳሰቢያ፦</strong> ማመልከቻውን ከላኩ በኋላ የፓስፖርትዎን ኮፒ በቴሌግራም ወይም በስልክ ቁጥራችን ይላኩልን።
-            </div>
-
-            <div class="form-group">
-                <label for="message">ተጨማሪ መልእክት</label>
-                <textarea id="message" name="message" rows="3" placeholder="ምንም አይነት ተጨማሪ ሀሳብ ካለዎት ይፃፉ..."></textarea>
-            </div>
-            
-            <button type="submit" class="btn" style="width: 100%;">አስገባ (Submit)</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Immigration Services. All rights reserved.</p>
-    </footer>
+    <!-- ሰው 2: DECLINED -->
+    <div class="card declined">
+        <div class="img-container">
+            <img src="https://via.placeholder.com/120" class="profile-img" alt="Profile">
+        </div>
+        <div class="info">
+            <p><strong>NAME:</strong> SISAY ZELEKE DEGAGO</p>
+            <p><strong>AGE:</strong> 46</p>
+            <p><strong>SEX:</strong> M</p>
+            <p><strong>NATIONALITY:</strong> ETHIOPIA</p>
+            <p><strong>EP:</strong> 1365278</p>
+            <p><strong>ACCEPTANCE:</strong> <span class="status-badge declined">DECLINED</span></p>
+        </div>
+    </div>
 
 </body>
 </html>
-
